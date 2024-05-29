@@ -1,0 +1,375 @@
+/* 헤드라인 */
+@import url("https://fonts.googleapis.com/css2?family=Gasoek+One&family=Gowun+Dodum&family=Song+Myung&family=Sunflower:wght@300&display=swap");
+/* 날짜 */
+@import url("https://fonts.googleapis.com/css2?family=Diphylleia&family=Oswald:wght@200..700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+:root {
+  --border-radius: 8px;
+  --main-padding: 0.5rem;
+
+  --base-background-color: #f8f8f8;
+  --base-second-font-color: #252525;
+  --base-background-emphasize-brackets: #ff9d9d;
+  --base-font-color: #919191;
+  --base-button-color: #495e57;
+  --base-button-bg-color: #006867;
+  --base-button-bg-color-hover: #7fbcbb;
+}
+
+#top {
+  position: fixed;
+  right: 20px;
+  bottom: 15%;
+  background-color: var(--base-background-color);
+  color: #fff;
+  padding: 10px 0;
+  border: none;
+  cursor: pointer;
+}
+
+#header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  height: 150px;
+  z-index: 1000;
+}
+
+.title_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  padding: 5px;
+}
+.title #times {
+  padding: 5px;
+  /* background-color: #000; */
+  color: #000;
+}
+
+/* ======================= search_form ======================= */
+.keyword span.active {
+  background-color: #ff9d9d;
+}
+
+.search_form {
+  position: relative;
+  text-align: center; /* 입력 상자와 버튼을 가운데 정렬하기 위해 */
+  background-color: var(--base-background-color);
+  padding: 0.5rem;
+}
+
+#search_bar {
+  width: 15rem;
+  display: inline-block; /* 입력 상자를 인라인 블록 요소로 만듦 */
+  vertical-align: middle; /* 버튼과 수직 정렬 */
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  border: 0.5px solid var(--base-font-color);
+}
+
+#search_bar[type="text"] {
+  padding-left: 20px; /* 왼쪽 여백 설정 */
+  font-size: 1rem;
+}
+
+#search {
+  display: inline-block; /* 버튼을 인라인 블록 요소로 만듦 */
+  vertical-align: middle; /* 입력 상자와 수직 정렬 */
+  height: 2.5rem;
+  width: 6rem;
+  border: none;
+  font-size: 1.5rem;
+  border-radius: var(--border-radius);
+  background-color: var(--base-button-bg-color);
+  color: #fff;
+  cursor: pointer;
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#search:hover {
+  font-weight: bold;
+  background-color: var(--base-button-bg-color-hover);
+  color: #fff;
+}
+
+.keyword {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding-top: 10px;
+  gap: 5px;
+}
+
+.keyword span {
+  padding: 5px 10px;
+  font-size: 1.5rem;
+  background-color: var(--base-button-bg-color);
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  margin: 5px;
+  text-transform: uppercase;
+
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.keyword span:hover {
+  background-color: var(--base-button-bg-color-hover);
+}
+
+/* main */
+#main {
+  position: absolute;
+  top: 150px;
+  height: 100vh;
+  padding-top: 20px;
+}
+
+.main_content {
+  margin: 0 3rem;
+}
+
+.headlines_container {
+  column-count: 3;
+  column-gap: 10px;
+}
+
+.headlines_container a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.headlines_container a li {
+  position: relative;
+  break-inside: avoid;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.preview {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: var(--base-second-font-color);
+  width: calc(100% - 30px);
+  height: 170px;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  line-height: 2rem;
+  white-space: normal;
+  overflow: hidden;
+  opacity: 0;
+  border: 1px solid #000000;
+  overflow-y: auto;
+  font-size: 1.2rem;
+}
+
+.headlines_container a:hover .preview {
+  background-color: rgba(255, 255, 255, 0.9);
+  opacity: 1;
+  z-index: 100;
+}
+
+.shortcuts {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 2rem;
+  opacity: 0;
+}
+
+.headlines_container a:hover .preview .shortcuts {
+  opacity: 1;
+}
+
+.top_title {
+  font-size: 1.5rem;
+  font-family: "Gowun Dodum", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  margin: 10px 0;
+  line-height: 2.8rem;
+  color: #000;
+}
+
+/* 헤드라인에서"",'' 안에 들어오는 문장 강조 */
+.emphasize {
+  font-weight: bold;
+  color: #fff;
+  padding: 2px 4px;
+  font-weight: normal;
+  background-color: var(--base-button-bg-color);
+  border-radius: 5px 5px;
+}
+
+.emphasize-brackets {
+  font-weight: bold;
+  color: #fff;
+  padding: 2px 4px;
+  font-weight: normal;
+  background-color: var(--base-background-emphasize-brackets);
+  border-radius: 5px 5px;
+}
+
+.img_container {
+  margin-bottom: 10px;
+}
+
+.img_container img {
+  position: relative;
+  width: 100%;
+  vertical-align: bottom;
+  border-radius: 20px;
+  object-fit: fill;
+}
+
+.journal_name {
+  position: absolute;
+  background-color: #6e6e6e;
+  color: #fff;
+  max-width: 150px;
+  padding: 5px;
+  border-radius: 20px 0 10px 0;
+  z-index: 10;
+}
+
+.published {
+  font-family: "Diphylleia", serif;
+  font-weight: 600;
+  font-style: normal;
+  color: #757575;
+}
+
+.to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 10%;
+  color: white;
+  font-size: 1rem;
+  padding-top: 1.8em;
+  display: inline-block; /* or block */
+  border-color: white;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease-out;
+  border-radius: 30%;
+  width: 60px;
+  height: 60px;
+  background-color: #252525;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.to-top:before {
+  content: "▲";
+  font-size: 0.9rem;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -0.7em;
+  border: solid 0.13em white;
+  border-radius: 10em;
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.3em;
+  border-color: inherit;
+  transition: transform 0.5s ease-in;
+}
+
+.to-top:hover:before {
+  transform: rotate(360deg);
+}
+
+/* 화면 크기가 1000px 이하일 때 */
+@media screen and (max-width: 1000px) {
+  .headlines_container {
+    column-count: 2;
+    column-gap: 5px;
+  }
+
+  .keyword span {
+    padding: 8px;
+    font-size: 1.2em;
+  }
+}
+
+/* 화면 크기가 600px 이하일 때 */
+@media screen and (max-width: 600px) {
+  .headlines_container {
+    column-count: 1;
+  }
+
+  .keyword {
+    align-items: center;
+  }
+
+  .keyword span {
+    padding: 4px;
+    font-size: 1rem;
+    margin: 3px;
+  }
+}
+
+/* 화면 크기가 360px 이하일 때 */
+@media screen and (max-width: 380px) {
+  .headlines_container {
+    column-count: 1;
+  }
+
+  .keyword {
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .keyword span {
+    padding: 3px;
+    font-size: 1rem;
+    margin: 3px;
+  }
+
+  .search_form {
+    padding: 0.3rem;
+  }
+
+  #search_bar {
+    width: 10rem;
+    display: inline-block; /* 입력 상자를 인라인 블록 요소로 만듦 */
+    vertical-align: middle; /* 버튼과 수직 정렬 */
+    height: 2rem;
+    padding: 0;
+    border: none;
+    border: 0.5px solid var(--base-font-color);
+  }
+
+  #search {
+    height: 2.5rem;
+    width: 3rem;
+    font-size: 1rem;
+  }
+}
