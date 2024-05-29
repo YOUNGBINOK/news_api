@@ -7,8 +7,6 @@ let headlinesContainer = document.querySelector(".headlines_container");
 let searchBar = document.getElementById("search_bar");
 let searchBtn = document.getElementById("search");
 let keywordSelect = document.querySelectorAll(".keyword span");
-let startDate = document.getElementById("startday");
-let endDate = document.getElementById("endday");
 
 let date = new Date();
 let thisYear = date.getFullYear();
@@ -20,7 +18,7 @@ if (thisMonth < 10) {
 } else {
   thisMonth = thisMonth;
 }
-let from = `${thisYear}-${thisMonth}-${today - 2}`;
+let from = `${thisYear}-${thisMonth}-${today - 1}`;
 let to = `${thisYear}-${thisMonth}-${today}`;
 
 //let url = `https://newsapi.org/v2/top-headlines?country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
@@ -39,6 +37,7 @@ async function arrayNews(url) {
     console.log(articleData);
     clearHeadlines(); // 이전 결과삭제
     headlinesList(); // 새로운 결과 추가
+    hoverEffect();
   } catch (error) {
     console.error(error);
   }
@@ -85,7 +84,7 @@ keywordSelect.forEach((keyword) => {
   }
 });
 
-setTimeout(() => {
+function hoverEffect() {
   let newsList = document.querySelectorAll(".headlines_container a li");
   newsList.forEach((list) => {
     // offsetHeight, clientHeight 값이 같음
@@ -96,7 +95,7 @@ setTimeout(() => {
       list.style.height = `${list.clientHeight - 200}px`;
     });
   });
-}, 200);
+}
 
 // 검색시 기존 검색 뉴스 리스트 삭제
 function clearHeadlines() {
@@ -125,8 +124,7 @@ function headlinesList() {
     headlinesList.appendChild(publishedDate);
     headlinesList.appendChild(preview);
     headlinesContainer.appendChild(newsLink);
-    console.log(publishedDate);
-    console.log(preview);
+
     preview.classList.add("preview");
     imgContainer.classList.add("img_container");
 

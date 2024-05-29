@@ -186,6 +186,10 @@
   font-size: 1.2rem;
 }
 
+.headlines_container a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .headlines_container a:hover .preview {
   background-color: rgba(255, 255, 255, 0.9);
   opacity: 1;
@@ -267,7 +271,7 @@
 .to-top {
   position: fixed;
   right: 15px;
-  bottom: 10%;
+  bottom: 20%;
   color: white;
   font-size: 1rem;
   padding-top: 1.8em;
