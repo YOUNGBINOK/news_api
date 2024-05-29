@@ -2,11 +2,11 @@
 let articleData = [];
 
 let keyword;
-let apiKey = "6bc0ad2a24d84210942031272eb86f72";
 let headlinesContainer = document.querySelector(".headlines_container");
 let searchBar = document.getElementById("search_bar");
 let searchBtn = document.getElementById("search");
 let keywordSelect = document.querySelectorAll(".keyword span");
+const apiKey = "6bc0ad2a24d84210942031272eb86f72";
 
 let date = new Date();
 let thisYear = date.getFullYear();
@@ -21,8 +21,8 @@ if (thisMonth < 10) {
 let from = `${thisYear}-${thisMonth}-${today - 1}`;
 let to = `${thisYear}-${thisMonth}-${today}`;
 
-//let url = `https://newsapi.org/v2/top-headlines?country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
-let url = "../data.json";
+let url = `https://newsapi.org/v2/top-headlines?country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
+//let url = "../data.json";
 
 async function arrayNews(url) {
   try {
@@ -31,9 +31,10 @@ async function arrayNews(url) {
     };
 
     const response = await fetch(url, options);
+
     const result = await response.json();
-    articleData = result;
-    //articleData = result.articles;
+    //articleData = result;
+    articleData = result.articles;
     console.log(articleData);
     clearHeadlines(); // 이전 결과삭제
     headlinesList(); // 새로운 결과 추가
@@ -57,11 +58,12 @@ searchBar.addEventListener("keyup", function (event) {
 });
 
 searchBtn.addEventListener("click", async function (url) {
-  url = "../data.json";
-  //url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
+  //url = "../data.json";
+  url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
   await arrayNews(url);
 });
 
+// 키워드 선택 시 실행
 keywordSelect.forEach((keyword) => {
   if (keyword) {
     keyword.addEventListener("click", async function () {
@@ -84,6 +86,7 @@ keywordSelect.forEach((keyword) => {
   }
 });
 
+// 뉴스리스트에 마우스 enter/leave 효과
 function hoverEffect() {
   let newsList = document.querySelectorAll(".headlines_container a li");
   newsList.forEach((list) => {
@@ -105,6 +108,7 @@ function clearHeadlines() {
   }
 }
 
+// 뉴스 기사 element 생성
 function headlinesList() {
   articleData.forEach((items) => {
     let headlinesList = document.createElement("li");

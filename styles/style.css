@@ -377,3 +377,41 @@
     font-size: 1rem;
   }
 }
+
+/* 화면 크기가 360px 이하일 때 */
+@media screen and (min-width: 1500px) {
+  .headlines_container {
+    column-count: 4;
+  }
+
+  .keyword {
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .keyword span {
+    padding: 3px;
+    font-size: 1rem;
+    margin: 3px;
+  }
+
+  .search_form {
+    padding: 0.3rem;
+  }
+
+  #search_bar {
+    width: 10rem;
+    display: inline-block; /* 입력 상자를 인라인 블록 요소로 만듦 */
+    vertical-align: middle; /* 버튼과 수직 정렬 */
+    height: 2rem;
+    padding: 0;
+    border: none;
+    border: 0.5px solid var(--base-font-color);
+  }
+
+  #search {
+    height: 2.5rem;
+    width: 3rem;
+    font-size: 1rem;
+  }
+}
