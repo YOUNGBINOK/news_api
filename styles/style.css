@@ -8,7 +8,6 @@
 :root {
   --border-radius: 8px;
   --main-padding: 0.5rem;
-
   --base-background-color: #f8f8f8;
   --base-second-font-color: #252525;
   --base-background-emphasize-brackets: #ff9d9d;
@@ -16,6 +15,9 @@
   --base-button-color: #495e57;
   --base-button-bg-color: #006867;
   --base-button-bg-color-hover: #7fbcbb;
+}
+.wrap {
+  position: relative;
 }
 
 #top {
@@ -45,6 +47,8 @@
   align-items: center;
   margin: 0 auto;
   text-align: center;
+  background-color: var(--base-second-font-color);
+  color: #fff;
 }
 
 .title {
@@ -53,8 +57,8 @@
 }
 .title #times {
   padding: 5px;
-  /* background-color: #000; */
-  color: #000;
+  background-color: var(--base-second-font-color);
+  color: #fff;
 }
 
 /* ======================= search_form ======================= */
@@ -138,8 +142,8 @@
 #main {
   position: absolute;
   top: 150px;
-  height: 100vh;
   padding-top: 20px;
+  padding-bottom: 220px;
 }
 
 .main_content {
@@ -308,6 +312,15 @@
 
 .to-top:hover:before {
   transform: rotate(360deg);
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 200px;
+  width: 100%;
+  background-color: #000;
 }
 
 /* 화면 크기가 1000px 이하일 때 */

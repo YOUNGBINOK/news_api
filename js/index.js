@@ -8,6 +8,15 @@ let searchBtn = document.getElementById("search");
 let keywordSelect = document.querySelectorAll(".keyword span");
 const apiKey = "6bc0ad2a24d84210942031272eb86f72";
 
+let topTitle;
+let imgContainer;
+let headlinesImg;
+let publishedDate;
+let newsLink;
+let journalName;
+let preview;
+let headlinesList;
+
 let date = new Date();
 let thisYear = date.getFullYear();
 let thisMonth = date.getMonth() + 1;
@@ -21,8 +30,8 @@ if (thisMonth < 10) {
 let from = `${thisYear}-${thisMonth}-${today - 1}`;
 let to = `${thisYear}-${thisMonth}-${today}`;
 
-let url = `https://newsapi.org/v2/top-headlines?country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
-//let url = "../data.json";
+//let url = `https://newsapi.org/v2/top-headlines?country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
+let url = "../data.json";
 
 async function arrayNews(url) {
   try {
@@ -33,11 +42,11 @@ async function arrayNews(url) {
     const response = await fetch(url, options);
 
     const result = await response.json();
-    //articleData = result;
-    articleData = result.articles;
+    articleData = result;
+    //articleData = result.articles;
     console.log(articleData);
     clearHeadlines(); // 이전 결과삭제
-    headlinesList(); // 새로운 결과 추가
+    createHeadlinesList(); // 새로운 결과 추가
     hoverEffect();
   } catch (error) {
     console.error(error);
@@ -58,8 +67,8 @@ searchBar.addEventListener("keyup", function (event) {
 });
 
 searchBtn.addEventListener("click", async function (url) {
-  //url = "../data.json";
-  url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
+  url = "../data.json";
+  //url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
   await arrayNews(url);
 });
 
@@ -109,16 +118,16 @@ function clearHeadlines() {
 }
 
 // 뉴스 기사 element 생성
-function headlinesList() {
+function createHeadlinesList() {
   articleData.forEach((items) => {
-    let headlinesList = document.createElement("li");
-    let topTitle = document.createElement("h2");
-    let imgContainer = document.createElement("div");
-    let headlinesImg = document.createElement("img");
-    let publishedDate = document.createElement("div");
-    let newsLink = document.createElement("a");
-    let journalName = document.createElement("p");
-    let preview = document.createElement("p");
+    headlinesList = document.createElement("li");
+    topTitle = document.createElement("h2");
+    imgContainer = document.createElement("div");
+    headlinesImg = document.createElement("img");
+    publishedDate = document.createElement("div");
+    newsLink = document.createElement("a");
+    journalName = document.createElement("p");
+    preview = document.createElement("p");
 
     headlinesList.appendChild(topTitle);
     newsLink.appendChild(headlinesList);
@@ -181,6 +190,27 @@ function headlinesList() {
     preview.textContent = items.description;
   });
 }
+
+window.addEventListener("scroll", () => {
+  const centerY = newsLink.offsetHeight / 2;
+  const centerX = newsLink.offsetWidth / 2;
+
+  const element = document.elementFromPoint(centerX, centerY);
+  console.log("1", element);
+
+  let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
+
+  if (element instanceof HTMLImageElement) {
+    console.log("s");
+  }
+
+  let windowHeight = window.innerHeight; // 스크린 창
+  let fullHeight = document.body.scrollHeight; // margin 값은 포함 x
+
+  if (scrollLocation + windowHeight >= fullHeight) {
+    console.log("끝");
+  }
+});
 
 function addNineHoursToUTC(utcString) {
   // UTC 시간 문자열을 Date 객체로 변환
