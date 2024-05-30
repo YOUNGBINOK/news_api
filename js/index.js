@@ -1,3 +1,20 @@
+// 모바일 횐경 확인
+function isMobile() {
+  let userAgent = navigator.userAgent;
+  let mobile = /(iPhone|iPad|Android|BlackBerry|Windows Phone)/i.test(
+    userAgent
+  );
+  return mobile;
+}
+const mediaQueryList = matchMedia("(max-width: 600px)");
+
+if (isMobile() || mediaQueryList.matches === true) {
+  console.log("현재 장치는 모바일입니다.");
+  window.addEventListener("touchmove", handleTouchEvent); // 터치 이벤트
+} else {
+  console.log("현재 장치는 모바일이 아닙니다.");
+}
+
 // https://newsapi.org/docs/endpoints/top-headlines
 let articleData = [];
 
@@ -191,26 +208,45 @@ function createHeadlinesList() {
   });
 }
 
-window.addEventListener("scroll", () => {
-  const centerY = newsLink.offsetHeight / 2;
-  const centerX = newsLink.offsetWidth / 2;
+function handleTouchEvent() {
+  handleScrollEvent();
+}
+
+function handleScrollEvent() {
+  const centerY = window.innerHeight / 2;
+  const centerX = window.innerWidth / 2;
 
   const element = document.elementFromPoint(centerX, centerY);
-  console.log("1", element);
 
-  let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
+  const newsLinks = document.querySelectorAll(".headlines_container a");
+  newsLinks.forEach((newsLink) => {
+    const img = newsLink.querySelector("img");
+    const previewElement = newsLink.querySelector(".preview");
+    const headlinesList = newsLink.querySelector("li");
 
-  if (element instanceof HTMLImageElement) {
-    console.log("s");
-  }
+    const imgRect = img.getBoundingClientRect();
+    const imgCenterY = imgRect.top + imgRect.height / 2;
 
-  let windowHeight = window.innerHeight; // 스크린 창
-  let fullHeight = document.body.scrollHeight; // margin 값은 포함 x
+    // // 높이 조정 상태를 저장하기 위한 데이터 속성 사용
+    if (!newsLink.dataset.heightAdjusted) {
+      newsLink.dataset.heightAdjusted = "false";
+    }
 
-  if (scrollLocation + windowHeight >= fullHeight) {
-    console.log("끝");
-  }
-});
+    if (
+      imgCenterY >= centerY - 60 &&
+      imgCenterY <= centerY + 60 &&
+      newsLink.dataset.heightAdjusted === "false"
+    ) {
+      headlinesList.style.height = `${headlinesList.clientHeight + 200}px`;
+      previewElement.style.opacity = 1;
+      newsLink.dataset.heightAdjusted = "true"; // 높이가 조정되었음을 표시
+    } else if (imgCenterY < centerY - 60 || imgCenterY > centerY + 60) {
+      headlinesList.style.height = ""; // 높이를 원래대로 되돌림
+      previewElement.style.opacity = 0;
+      newsLink.dataset.heightAdjusted = "false"; // 높이 조정 플래그를 초기화
+    }
+  });
+}
 
 function addNineHoursToUTC(utcString) {
   // UTC 시간 문자열을 Date 객체로 변환
