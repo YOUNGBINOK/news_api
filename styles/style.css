@@ -345,7 +345,7 @@
 }
 
 /* 화면 크기가 360px 이하일 때 */
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 400px) {
   .headlines_container {
     column-count: 1;
   }
