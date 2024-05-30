@@ -1,20 +1,3 @@
-// 모바일 횐경 확인
-function isMobile() {
-  let userAgent = navigator.userAgent;
-  let mobile = /(iPhone|iPad|Android|BlackBerry|Windows Phone)/i.test(
-    userAgent
-  );
-  return mobile;
-}
-const mediaQueryList = matchMedia("(max-width: 600px)");
-
-if (isMobile() || mediaQueryList.matches === true) {
-  console.log("현재 장치는 모바일입니다.");
-  window.addEventListener("touchmove", handleTouchEvent); // 터치 이벤트
-} else {
-  console.log("현재 장치는 모바일이 아닙니다.");
-}
-
 // https://newsapi.org/docs/endpoints/top-headlines
 let articleData = [];
 
@@ -276,4 +259,39 @@ function addNineHoursToUTC(utcString) {
 let topScroll = document.getElementById("to-top");
 topScroll.addEventListener("click", function () {
   window.scrollTo(0, 0);
+});
+
+// 모바일 횐경 확인
+function isMobile() {
+  let userAgent = navigator.userAgent;
+  let mobile = /(iPhone|iPad|Android|BlackBerry|Windows Phone)/i.test(
+    userAgent
+  );
+  //console.log(mobile);
+  return mobile;
+}
+const mediaQueryList = matchMedia("(max-width: 600px)");
+
+if (isMobile() && mediaQueryList.matches === true) {
+  console.log("현재 장치는 모바일입니다. ");
+  window.addEventListener("touchmove", handleTouchEvent); // 터치 이벤트
+} else if (isMobile() && mediaQueryList.matches === false) {
+  console.log("현재 장치는 모바일이지만 화면의 크기가 600px이상입니다.");
+} else if (!isMobile() && mediaQueryList.matches === true) {
+  console.log("현재 장치는 모바일이 아니지만 화면의 크기가 600px이하입니다.");
+} else {
+  console.log("현재 장치는 모바일이 아니지만 화면의 크기가 600px이상입니다.");
+}
+
+window.addEventListener("resize", function () {
+  if (isMobile() && mediaQueryList.matches === true) {
+    console.log("현재 장치는 모바일입니다. ");
+    window.addEventListener("touchmove", handleTouchEvent); // 터치 이벤트
+  } else if (isMobile() && mediaQueryList.matches === false) {
+    console.log("현재 장치는 모바일이지만 화면의 크기가 600px이상입니다.");
+  } else if (!isMobile() && mediaQueryList.matches === true) {
+    console.log("현재 장치는 모바일이 아니지만 화면의 크기가 600px이하입니다.");
+  } else {
+    console.log("현재 장치는 모바일이 아니지만 화면의 크기가 600px이상입니다.");
+  }
 });
