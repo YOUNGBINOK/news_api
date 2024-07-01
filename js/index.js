@@ -64,8 +64,8 @@ if (thisMonth < 10) {
 let from = `${thisYear}-${thisMonth}-${today - 1}`;
 let to = `${thisYear}-${thisMonth}-${today}`;
 
-//let url = `https://newsapi.org/v2/top-headlines?country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
-let url = "../data.json";
+let url = `https://newsapi.org/v2/top-headlines?country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
+//let url = "../data.json";
 
 async function arrayNews(url) {
   try {
@@ -76,9 +76,17 @@ async function arrayNews(url) {
     const response = await fetch(url, options);
 
     const result = await response.json();
-    articleData = result;
-    //articleData = result.articles;
-    console.log(articleData);
+    //articleData = result;
+    articleData = result.articles;
+    // let keyword = document.querySelectorAll(".keyword span");
+    // keyword.forEach((element) => {
+    //   if (element.className === "active") {
+
+    //     let articleNum = document.querySelectorAll(".number");
+    //     articleNum.textContent = `(${articleData.length})`;
+    //   }
+    // });
+
     clearHeadlines(); // 이전 결과삭제
     createHeadlinesList(); // 새로운 결과 추가
     hoverEffect();
@@ -101,8 +109,8 @@ searchBar.addEventListener("keyup", function (event) {
 });
 
 searchBtn.addEventListener("click", async function (url) {
-  url = "../data.json";
-  //url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
+  //url = "../data.json";
+  url = `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&from=${from}&to=${to}&pageSize=50&sortBy=popularity&apiKey=${apiKey}`;
   await arrayNews(url);
 });
 
